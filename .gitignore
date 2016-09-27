@@ -1,0 +1,18 @@
+
+*.class
+*.jar
+*.war
+*.ear
+
+#gradle
+.gradle
+build/
+# Avoid ignoring wrapper
+!gradle-wrapper.jar
+
+bin/
+.settings
+.DS_Store
+.project
+.classpath
+
