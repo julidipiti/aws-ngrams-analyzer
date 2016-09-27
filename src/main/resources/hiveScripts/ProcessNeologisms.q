@@ -1,6 +1,6 @@
 -- Looks for the neologisms that appeared from one year to the other at shifting
 -- the window.
--- Needs ${ngramsTable}, ${year}
+-- Needs ${ngramsTable}, ${year}, ${percentOfYears}
 
 -- Creating a table to store all the neologisms processed with this window size
 -- and in the respective range.
