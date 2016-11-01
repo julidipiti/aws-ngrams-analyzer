@@ -25,10 +25,10 @@ Now, just select the options that `ANA` offers to you to run the analyzer, and t
 `ANA` creates a bucket in S3, uploads the hive scripts and generates EMR steps to run them. They generate up to 20 neologisms by year and 1K foreignisms on the language specified.
 
 ### Finding neologisms
-For a the selected main language, `ANA` creates a window of size **W** and selects all of the ngrams in that period. Then, it shifts the window year by year, and at every shift it selects the ngrams that didn't occur at least **percentOfYears** (i.e.: 80% in a window of size 5 would be 4) in the previous window, but after the shift they do (in the previous example, the ngram was 3 out of 5 years in the window but after the shifting the counters get updated and they reflect 4 out of 5 years now, so we found a neologism).
+For the selected main language, `ANA` creates a window of size **W** and selects all of the ngrams in that period. Then, it shifts the window year by year, and at every shift it selects the ngrams that didn't occur at least **percentOfYears** in the previous window (i.e.: 80% in a window of size 5 it would be 4), but after the shift they do (in the previous example, the ngram was 3 out of 5 years in the window but after the shifting the counters get updated and they reflect 4 out of 5 years now, so we found a neologism).
 
 ### Finding foreignisms
-A foreignism is a foreign term that one language borrowed from another one. `ANA` selects all the ngrams of a second selected language, and looks for matches in both languages trying to detect when some ngram occurs in both languages but with a big usage ratio difference. Bad labeling in some books of the corpora and quotes from different languages may cause the output to be filled with the most common words of one language. But with better data it works just fine. I leave it as a PoC.
+A foreignism is a foreign term that one language borrowed from another one. `ANA` selects all the ngrams of the second language selected, and looks for matches in both languages trying to detect when some ngram occurs in both of them but with a big usage ratio difference. Bad labeling in some books of the corpora and quotes from different languages may cause the output to be filled with the most common words of one language. But with better data it works just fine. I leave it as a PoC.
 
 
 ## Problems
