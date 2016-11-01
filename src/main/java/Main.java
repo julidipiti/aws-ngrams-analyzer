@@ -72,7 +72,7 @@ public class Main {
     String language2 = s3h.selectLanguageOption();
 
     IOHelper.println();
-    IOHelper.println("Select master instance type:");
+    IOHelper.println("Select master instance type (i.e.: m2.xlarge):");
     String masterInstanceType = emrh.selectInstanceType();
 
     IOHelper.println();
@@ -222,6 +222,9 @@ public class Main {
     RunJobFlowRequest request =
         emrh.getRunJobFlowRequest(
             applications, configurations, steps, jobFlowInstancesConfig, logsPath);
+
+    IOHelper.println();
+    IOHelper.println("Wait...");
 
     RunJobFlowResult result = emrh.runJobFlow(request);
     IOHelper.println();
