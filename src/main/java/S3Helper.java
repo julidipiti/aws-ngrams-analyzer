@@ -44,9 +44,8 @@ public class S3Helper {
       s3.createBucket(bucketName);
     } catch (AmazonServiceException ase) {
       IOHelper.println(
-          "Caught an AmazonServiceException, which means "
-              + "your request made it to Amazon S3, but was rejected with"
-              + " an error response for some reason.");
+          "Caught an AmazonServiceException, which means your request made it to Amazon S3, but was"
+              + " rejected with an error response for some reason.");
       IOHelper.println("Error Message:    " + ase.getMessage());
       IOHelper.println("HTTP Status Code: " + ase.getStatusCode());
       IOHelper.println("AWS Error Code:   " + ase.getErrorCode());
@@ -54,10 +53,9 @@ public class S3Helper {
       IOHelper.println("Request ID:       " + ase.getRequestId());
     } catch (AmazonClientException ace) {
       IOHelper.println(
-          "Caught an AmazonClientException, which means "
-              + "the client encountered a serious internal problem while "
-              + "trying to communicate with S3, such as not being able to"
-              + " access the network.");
+          "Caught an AmazonClientException, which means the client encountered a serious internal "
+          + "problem while trying to communicate with S3, such as not being able to access the "
+          + "network.");
       IOHelper.println("Error Message: " + ace.getMessage());
     }
   }
@@ -77,9 +75,8 @@ public class S3Helper {
       s3.putObject(new PutObjectRequest(bucketName, relativePath + file.getName(), file));
     } catch (AmazonServiceException ase) {
       IOHelper.println(
-          "Caught an AmazonServiceException, which means "
-              + "your request made it to Amazon S3, but was rejected with"
-              + " an error response for some reason.");
+          "Caught an AmazonServiceException, which means your request made it to Amazon S3, but was"
+          + " rejected with an error response for some reason.");
       IOHelper.println("Error Message:    " + ase.getMessage());
       IOHelper.println("HTTP Status Code: " + ase.getStatusCode());
       IOHelper.println("AWS Error Code:   " + ase.getErrorCode());
@@ -87,10 +84,9 @@ public class S3Helper {
       IOHelper.println("Request ID:       " + ase.getRequestId());
     } catch (AmazonClientException ace) {
       IOHelper.println(
-          "Caught an AmazonClientException, which means "
-              + "the client encountered a serious internal problem while "
-              + "trying to communicate with S3, such as not being able to"
-              + " access the network.");
+          "Caught an AmazonClientException, which means the client encountered a serious internal "
+          + "problem while trying to communicate with S3, such as not being able to access the "
+          + "network.");
       IOHelper.println("Error Message: " + ace.getMessage());
     }
   }
@@ -142,8 +138,8 @@ public class S3Helper {
 
   /**
    * Creates a file from a stream. This method is needed because the files in the program are loaded
-   * as resources, which we get a streams. Then on execution we create temporary files to upload
-   * to S3 and then be deleted when the VM stops.
+   * as resources, which we get a streams. Then on execution we create temporary files to upload to
+   * S3 and then be deleted when the VM stops.
    *
    * @param in The stream with the script.
    * @param name The name of the file to create.

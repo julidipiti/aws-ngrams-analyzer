@@ -50,7 +50,7 @@ public class Main {
       credentials = new ProfileCredentialsProvider("default").getCredentials();
     } catch (Exception exc) {
       throw new AmazonClientException(
-          "Cannot load the credentials from the credential profiles" + "file. " + exc);
+          "Cannot load the credentials from the credential profiles file. " + exc);
     }
 
     s3h = new S3Helper(credentials, region);
@@ -100,7 +100,7 @@ public class Main {
 
     IOHelper.println();
     IOHelper.println(
-        "Insert the percent of years needed for a gram, " + "between 0.1 and 1.0 (e.g., 0.8):");
+        "Insert the percent of years needed for a gram, between 0.1 and 1.0 (e.g., 0.8):");
     double percentOfYears = IOHelper.getDouble();
 
     runFinders(
@@ -156,8 +156,8 @@ public class Main {
     }
     if (fromYear + windowSize > toYear) {
       throw new IllegalArgumentException(
-          "There are not enough years to shift the window. Make sure "
-              + "fromYear + windowSize is less than toYear.");
+          "There are not enough years to shift the window. Make sure fromYear + windowSize is less "
+              + "than toYear.");
     }
     if (percentOfYears < 0.1 || percentOfYears > 1.0) {
       throw new IllegalArgumentException("percentOfYears must be between 0.1 and 1.0");
@@ -173,6 +173,7 @@ public class Main {
             windowSize,
             percentOfYears));
 
+    // Defines if the steps for finding foreignisms are needed.
     if (!language1.equals(language2)) {
       steps.addAll(
           getHiveStepsForCreatingDictionary(
@@ -185,22 +186,31 @@ public class Main {
 
       steps.addAll(
           getHiveStepsForForeignismsFinder(
-              ngramsTable1, ngramsTable2, fromYear, toYear, windowSize, percentOfYears));
+              ngramsTable1,
+              ngramsTable2,
+              fromYear,
+              toYear,
+              windowSize,
+              percentOfYears));
     }
 
     steps.addAll(
         getHiveStepsForNeologismsFinder(
-            ngramsTable1, fromYear, toYear, windowSize, percentOfYears));
+            ngramsTable1,
+            fromYear,
+            toYear,
+            windowSize,
+            percentOfYears));
 
     Application[] applications = emrh.getApplications();
     Configuration[] configurations = emrh.getConfigurations();
 
     IOHelper.println();
-    IOHelper.println("Insert the size of the cluster, between 1 and 20 " + "(e.g., 10):");
+    IOHelper.println("Insert the size of the cluster, between 1 and 20 (e.g., 10):");
     int clusterSize = IOHelper.getInteger();
 
     // Uncomment these lines and pass the parameter to the getRunJobFlowRequest if you want to use
-    // an ec2-key on the connection.
+    // an ec2-key on the connection, needed for SSH.
     //System.out.println();
     //System.out.println("Insert the name of the ec2-key (e.g., my-key):");
     //String ec2key = IOHelper.getWord();
@@ -301,7 +311,9 @@ public class Main {
               getStepName(),
               scriptsFullPath + "ShiftWindow.q",
               createParameters(
-                  "ngramsTable=" + ngramsTable, "newYear=" + i, "windowSize=" + windowSize)));
+                  "ngramsTable=" + ngramsTable,
+                  "newYear=" + i,
+                  "windowSize=" + windowSize)));
     }
 
     steps.add(

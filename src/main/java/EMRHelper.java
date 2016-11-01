@@ -59,7 +59,8 @@ public class EMRHelper {
    */
   public Application[] getApplications() {
     Application[] applications = {
-      new Application().withName("hive"), new Application().withName("hadoop")
+      new Application().withName("hive"),
+      new Application().withName("hadoop")
     };
     return applications;
   }
@@ -88,7 +89,8 @@ public class EMRHelper {
    * @return A valid configuration for a JobFlow that finishes when it runs out of steps or fails.
    */
   public JobFlowInstancesConfig getJobFlowInstancesConfig(
-      /*String ec2KeyName,*/ int instanceCount,
+      /*String ec2KeyName,*/
+      int instanceCount,
       String masterInstanceType,
       String slaveInstanceType) {
     return new JobFlowInstancesConfig()
